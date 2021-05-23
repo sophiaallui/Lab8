@@ -1,6 +1,8 @@
 describe('Basic user flow for SPA ', () => {
   beforeAll(async () => {
-    await page.goto('http://127.0.0.1:5500');
+    // NOTE: i have a server problem, and if it's 5500, it has a cache to my previously loaded html, 
+    // current working port is 5501 for me, and it loads the correct content (journal entries)
+    await page.goto('http://127.0.0.1:5501');
     await page.waitForTimeout(500);
   });
 
@@ -29,7 +31,9 @@ describe('Basic user flow for SPA ', () => {
 
   it('Test3: Clicking first <journal-entry>, new URL should contain /#entry1', async () => {
     // implement test3: Clicking on the first journal entry should update the URL to contain “/#entry1”
-
+    await page.click('journal-entry'); 
+    let curUrl = page.url(); 
+    expect(curUrl).toBe('http://127.0.0.1:5501/#entry1');
   });
 
   it('Test4: On first Entry page - checking page header title', async () => {
