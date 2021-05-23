@@ -38,6 +38,7 @@ describe('Basic user flow for SPA ', () => {
 
   it('Test4: On first Entry page - checking page header title', async () => {
     // implement test4: Clicking on the first journal entry should update the header text to “Entry 1” 
+    //idk whts happenedin
 
   });
 
