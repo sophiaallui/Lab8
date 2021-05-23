@@ -31,14 +31,17 @@ describe('Basic user flow for SPA ', () => {
 
   it('Test3: Clicking first <journal-entry>, new URL should contain /#entry1', async () => {
     // implement test3: Clicking on the first journal entry should update the URL to contain “/#entry1”
-    await page.click('journal-entry'); 
+    await page.onClick('journal-entry'); 
     let curUrl = page.url(); 
     expect(curUrl).toBe('http://127.0.0.1:5501/#entry1');
   });
 
   it('Test4: On first Entry page - checking page header title', async () => {
     // implement test4: Clicking on the first journal entry should update the header text to “Entry 1” 
-    //idk whts happenedin
+    const header = await page.$eval('body > header > h1', el => el.innerText); 
+
+    // checkings to see if it's equal to entry 1 
+    expect(header).toBe('Entry 1');
 
   });
 
