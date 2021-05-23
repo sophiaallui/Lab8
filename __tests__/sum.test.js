@@ -1,4 +1,4 @@
-// sum.test.js
+// sum.test.js testung
 import {sum} from '../scripts/sum.js'
 test('adds 1 + 2 to equal 3', () => {
     expect(1 + 2).toBe(3);
