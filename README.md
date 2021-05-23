@@ -14,6 +14,7 @@
 **answer**: I would use a unit test to test the "max message length" because it isolates the feature. Since this is a feature for the application, if we can find the bugs by unit testing, it would help the developer fit this feature into the overall component. 
 
 4. What do you expect to happen if we run our puppeteer tests with the field “headless” set to true?
+**answer**: If headless is set to false, we can see how the puppeteer works. Therefore, if it is set to true, we wouldn't be able to see how the puppeteer drives the browser. Would only see a direct response from our program without the puppeteer stepping through. 
 
 5. What would your beforeAll callback look like if you wanted to start from the settings page before every test case?
 
