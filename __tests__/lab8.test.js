@@ -199,5 +199,12 @@ describe('Basic user flow for SPA ', () => {
     // checkings to see if it's equal to entry 1 
     expect(updatedheader).toBe('Entry 3');
   });
+
+  it('Test20: Verify that third entry does not have audio', async() => {
+    const thirdAudio = await page.$eval('body > entry-page', el => el.entry.audio); 
+
+    // check to see if third entry does not have audio 
+    expect(thirdAudio).toBe(); 
+  })
   
 });
