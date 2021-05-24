@@ -119,21 +119,46 @@ describe('Basic user flow for SPA ', () => {
   });
 
   // define and implement test11: Clicking the back button once should bring the user back to the home page
+  it('Test11: Clicking the back button, entered home page', async() => {
+    // implement test10: Clicking on the back button should update the URL to contain ‘/#entry1’
+    let backURL = 'http://127.0.0.1:5501/' 
+    await page.goBack(); 
+    expect(page.url()).toBe(backURL);
 
-  
-
+  });
 
   // define and implement test12: When the user if on the homepage, the header title should be “Journal Entries”
+  it('Test12: On home page, check if header if "Journal Entries', async() => {
 
+    const updatedheader = await page.$eval('body > header > h1', el => el.textContent); 
 
+    // checkings to see if it's equal to Settings
+    expect(updatedheader).toBe('Journal Entries');
+
+  });
   // define and implement test13: On the home page the <body> element should not have any class attribute 
+  it('Test13: On home page - checking <body> element classes', async () => {
+    // implement test9: Clicking on the settings icon should update the class attribute of <body> to ‘settings’
+    const classAttribute = await page.$eval('body', el => el.className); 
 
+    expect(classAttribute).toBe('')
+
+  });
 
   // define and implement test14: Verify the url is correct when clicking on the second entry
-
+  it('Test14: Clicking first <journal-entry>, new URL should contain /#entry2', async () => {
+    // implement test14: Clicking on the first journal entry should update the URL to contain “/#entry2”
+    await page.click('journal-entry:nth-child(2)'); 
+    let curUrl = page.url(); 
+    expect(curUrl).toBe('http://127.0.0.1:5501/#entry2');
+  });
 
   // define and implement test15: Verify the title is current when clicking on the second entry
-
+  it('Test15: On second Entry page - verifying current title is current', async () => {
+    const updatedheader = await page.$eval('body > header > h1', el => el.textContent); 
+    // checkings to see if it's equal to entry 1 
+    expect(updatedheader).toBe('Entry 2');
+  });
 
   // define and implement test16: Verify the entry page contents is correct when clicking on the second entry
 
