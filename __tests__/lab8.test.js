@@ -146,7 +146,7 @@ describe('Basic user flow for SPA ', () => {
   });
 
   // define and implement test14: Verify the url is correct when clicking on the second entry
-  it('Test14: Clicking first <journal-entry>, new URL should contain /#entry2', async () => {
+  it('Test14: Clicking second <journal-entry>, new URL should contain /#entry2', async () => {
     // implement test14: Clicking on the first journal entry should update the URL to contain “/#entry2”
     await page.click('journal-entry:nth-child(2)'); 
     let curUrl = page.url(); 
@@ -161,14 +161,43 @@ describe('Basic user flow for SPA ', () => {
   });
 
   // define and implement test16: Verify the entry page contents is correct when clicking on the second entry
+  it('Test16: On second Entry page - checking <entry-page> contents', async () => {
+    const secondEntry = {
+        date: "4/26/2021",
+        title: "Run, Forrest! Run!",
+        content: "Mama always said life was like a box of chocolates. You never know what you're gonna get.",
+        image: {
+          src: "https://s.abcnews.com/images/Entertainment/HT_forrest_gump_ml_140219_4x3_992.jpg",
+          alt: "forrest running"
+        }
+      }; 
+      const secondJournal = await page.$eval('body > entry-page', el => el.entry); 
 
+    // Checking the entry content from current source
+    expect(secondEntry).toEqual(secondJournal);
+  });
 
-  // create your own test 17
-
-  // create your own test 18
+  // define and implement test17: Clicking the back button once should bring the user back to the home page
+  it('Test17: Clicking the back button, entered home page', async() => {
+    // implement test10: Clicking on the back button should update the URL to contain ‘/#entry1’
+    let backURL = 'http://127.0.0.1:5501/' 
+    await page.goBack(); 
+    expect(page.url()).toBe(backURL);
+  });
 
   // create your own test 19
+    // define and implement test14: Verify the url is correct when clicking on the second entry
+    it('Test18: Clicking third <journal-entry>, new URL should contain /#entry3', async () => {
+      await page.click('journal-entry:nth-child(3)'); 
+      let curUrl = page.url(); 
+      expect(curUrl).toBe('http://127.0.0.1:5501/#entry3');
+    }); 
 
-  // create your own test 20
+  // create your own test 18
+  it('Test19: On third Entry page - verifying current title is current', async () => {
+    const updatedheader = await page.$eval('body > header > h1', el => el.textContent); 
+    // checkings to see if it's equal to entry 1 
+    expect(updatedheader).toBe('Entry 3');
+  });
   
 });
