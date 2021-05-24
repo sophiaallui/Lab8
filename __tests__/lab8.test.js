@@ -70,38 +70,57 @@ describe('Basic user flow for SPA ', () => {
     };
     
     const firstEntry = await page.$eval('body > entry-page', el => el.entry); 
-    
-      // Checking the entry content from current source
-      expect(firstJournal).toEqual(firstEntry);
+
+    // Checking the entry content from current source
+    expect(firstJournal).toEqual(firstEntry);
 
   }, 10000);
 
   it('Test6: On first Entry page - checking <body> element classes', async () => {
     // implement test6: Clicking on the first journal entry should update the class attribute of <body> to ‘single-entry’
 
+    const classAttribute = await page.$eval('body', el => el.className); 
+
+    expect(classAttribute).toBe('single-entry')
+
   });
 
   it('Test7: Clicking the settings icon, new URL should contain #settings', async () => {
     // implement test7: Clicking on the settings icon should update the URL to contain “/#settings”
+    await page.click('body > header > img'); 
+    let curUrl = page.url(); 
+    expect(curUrl).toBe('http://127.0.0.1:5501/#settings');
 
   });
 
   it('Test8: On Settings page - checking page header title', async () => {
     // implement test8: Clicking on the settings icon should update the header to be “Settings”
+    const updatedheader = await page.$eval('body > header > h1', el => el.textContent); 
+
+    // checkings to see if it's equal to Settings
+    expect(updatedheader).toBe('Settings');
 
   });
 
   it('Test9: On Settings page - checking <body> element classes', async () => {
     // implement test9: Clicking on the settings icon should update the class attribute of <body> to ‘settings’
+    const classAttribute = await page.$eval('body', el => el.className); 
+
+    expect(classAttribute).toBe('settings')
 
   });
 
   it('Test10: Clicking the back button, new URL should be /#entry1', async() => {
     // implement test10: Clicking on the back button should update the URL to contain ‘/#entry1’
+    let backURL = 'http://127.0.0.1:5501/#entry1' 
+    await page.goBack(); 
+    expect(page.url()).toBe(backURL);
 
   });
 
   // define and implement test11: Clicking the back button once should bring the user back to the home page
+
+  
 
 
   // define and implement test12: When the user if on the homepage, the header title should be “Journal Entries”
